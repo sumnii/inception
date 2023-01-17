@@ -22,8 +22,9 @@ RUN	chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key
 
 COPY	./srcs/run.sh ./
 COPY	./srcs/default ./etc/nginx/sites-available/
-# COPY	./srcs/wp-config.php ./var/www/html/wordpress/
-# COPY	./srcs/config.inc.php ./var/www/html/phpmyadmin/
+COPY	./srcs/wp-config.php ./
+COPY	./srcs/config.inc.php ./var/www/html/phpmyadmin/
+COPY	./srcs/setting.sql ./
 # HostOS의 파일 또는 디렉토리를 컨테이너 안의 경로로 복사한다.
 
 EXPOSE	80 443
