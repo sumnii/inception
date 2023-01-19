@@ -8,7 +8,7 @@ RUN	apt-get install -y \
 	nginx \
 	openssl
 
-# nginx의 데몬을 off 하여 foreground process로 올리기
+# nginx의 데몬을 off 하여 foregro]und process로 올리기
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # openssl 개인키, 공개키 생성
@@ -24,4 +24,5 @@ COPY	conf/default /etc/nginx/sites-available/
 # 443 포트를 연결할 예정이다, 라고 안내
 EXPOSE	443
 
-CMD	service nginx start
+# 변하지 않을 명령어는 ENTRYPOINT에, 변경될 인수는 CMD에 넣는 것이 좋음
+ENTRYPOINT	["service", "nginx", "start"]
