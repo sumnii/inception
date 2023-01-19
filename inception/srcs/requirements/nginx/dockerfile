@@ -8,14 +8,20 @@ RUN	apt-get install -y \
 	nginx \
 	openssl
 
+# nginx의 데몬을 off 하여 foreground process로 올리기
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
+# openssl 개인키, 공개키 생성
 RUN	openssl req -newkey rsa:4096 -days 365 -nodes -x509 \
 	-subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Gam/CN=localhost" \
 	-keyout /etc/ssl/private/localhost.dev.key \
 	-out etc/ssl/certs/localhost.dev.crt && \
 	chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key
 
+# nginx conf 파일 복사
 COPY	conf/default /etc/nginx/sites-available/
 
+# 443 포트를 연결할 예정이다, 라고 안내
 EXPOSE	443
+
+CMD	service nginx start
