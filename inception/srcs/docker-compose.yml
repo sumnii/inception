@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  nginx:
+    # Dockerfile이 있는 위치
+    build: ./requirements/nginx/
+    # 개방 ports
+    ports:
+      - 443:443
+    # volumes:
+    #   - ():()
+
+  mariadb:
+    build: ./requirements/mariadb/
+    env_file:
+      - .env
