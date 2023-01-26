@@ -11,6 +11,5 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWD';
 FLUSH PRIVILEGES;
 eof
 
-# check
-echo hi
-bash
+# bash
+mysqld
