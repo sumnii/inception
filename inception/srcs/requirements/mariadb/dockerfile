@@ -5,7 +5,6 @@ RUN	apt-get update && apt-get upgrade -y && \
 	mariadb-server
 
 COPY	./tools/mariadb_setup.sh ./mariadb_setup.sh
-COPY	./tools/db_setting.sql ./db_setting.sql
 
 EXPOSE	3306
 
