@@ -7,13 +7,21 @@ services:
     # 컨테이너 외부 개방 (포트 바인딩)
     ports:
       - 443:443
-    # volumes:
-    #   - ():()
+    volumes:
+      - wordpress:/var/www/html
 
   mariadb:
     build: ./requirements/mariadb/
     # 컨테이너 내부 개방
     expose:
       - 3306
-    env_file:
-      - .env
+    env_file: .env
+
+  wordpress:
+    build: ./requirements/wordpress/
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/html
+
+volumes:
+  wordpress:
