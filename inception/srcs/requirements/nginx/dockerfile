@@ -8,7 +8,7 @@ RUN	apt-get install -y \
 	nginx \
 	openssl
 
-# nginx의 데몬을 off 하여 foregro]und process로 올리기
+# nginx의 데몬을 off 하여 foreground process로 올리기
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # openssl 개인키, 공개키 생성
