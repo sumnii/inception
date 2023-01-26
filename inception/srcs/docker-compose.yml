@@ -4,7 +4,7 @@ services:
   nginx:
     # Dockerfile이 있는 위치
     build: ./requirements/nginx/
-    # 개방 ports
+    # 컨테이너 외부 개방 (포트 바인딩)
     ports:
       - 443:443
     # volumes:
@@ -12,5 +12,8 @@ services:
 
   mariadb:
     build: ./requirements/mariadb/
+    # 컨테이너 내부 개방
+    expose:
+      - 3306
     env_file:
       - .env
