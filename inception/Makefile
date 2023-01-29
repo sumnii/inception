@@ -11,9 +11,10 @@ clean:
 	@docker-compose -f ./srcs/docker-compose.yml down --rmi all
 
 fclean: clean
-	# docker rmi `docker images -aq`
 	docker network prune
 	docker volume rm `docker volume ls -q`
+	rm -rf /tmp/wordpress /tmp/mariadb
+	mkdir /tmp/wordpress /tmp/mariadb
 
 re: fclean all
 
