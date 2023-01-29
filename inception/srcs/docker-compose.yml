@@ -19,38 +19,35 @@ services:
       - mariadb
     build: ./requirements/wordpress/
     restart: on-failure
+    expose:
+      - 9000
     env_file: .env
-    environment:
-      - WORDPRESS_DB_HOST=mariadb:3306
-      - WORDPRESS_DB_USER=$MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=$MYSQL_DATABASE
     volumes:
-      - wordpress:/var/www/html
+      - wordpress:/var/www/html/wordpress
     networks:
       - docker-network
 
-  # nginx:
-  #   # 의존성
-  #   depends_on:
-  #     - wordpress
-  #   # 수동 중지 제외 컨테이너 재시작
-  #   restart: on-failure
-  #   # Dockerfile이 있는 위치
-  #   build: ./requirements/nginx/
-  #   # 컨테이너 외부 개방 (포트 바인딩/호스트와의 연결)
-  #   ports:
-  #     - 443:443
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   networks:
-  #     - docker-network
+  nginx:
+    # 의존성
+    depends_on:
+      - wordpress
+    # 수동 중지 제외 컨테이너 재시작
+    restart: on-failure
+    # Dockerfile이 있는 위치
+    build: ./requirements/nginx/
+    # 컨테이너 외부 개방 (포트 바인딩/호스트와의 연결)
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    networks:
+      - docker-network
 
 volumes:
   db:
     driver: local
     driver_opts:
-      type: volume
+      type: none
       # device: /home/sumsong/data/mariadb
       device: /tmp/mariadb
       o: bind
@@ -58,7 +55,7 @@ volumes:
   wordpress:
     driver: local
     driver_opts:
-      type: volume
+      type: none
       # device: /home/sumsong/data/wordpress
       device: /tmp/wordpress
       o: bind
