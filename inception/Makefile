@@ -13,8 +13,6 @@ clean:
 fclean: clean
 	docker network prune
 	docker volume rm `docker volume ls -q`
-	rm -rf /tmp/wordpress /tmp/mariadb
-	mkdir /tmp/wordpress /tmp/mariadb
 
 re: fclean all
 
