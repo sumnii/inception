@@ -5,12 +5,19 @@ RUN	apt-get update && apt-get install -y \
 	php-mysql \ 
 	php-mbstring \
 	php7.3-fpm \
-	curl
+	php-cli \
+	curl \
+	sudo
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
-	mv wp-cil.phar /usr/bin/wp
+	mv wp-cli.phar /usr/bin/wp
+
+RUN mkdir /run/php
 
 COPY	./tools/wordpress_setup.sh ./
+COPY	./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-ENTRYPOINT	["bash", "wordpress_setup.sh"]
+WORKDIR	/var/www/html/wordpress
+
+ENTRYPOINT	["bash", "/wordpress_setup.sh"]
