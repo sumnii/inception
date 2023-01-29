@@ -8,9 +8,8 @@ services:
     expose:
       - 3306
     env_file: .env
-    command: "--default-authentication-plugin=mysql_native_password"
     volumes:
-      - db:/var/lib/mysql
+      - db:/var/lib/mysql/
     networks:
       - docker-network
 
@@ -22,6 +21,11 @@ services:
     expose:
       - 9000
     env_file: .env
+    environment:
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_ADMIN=$MYSQL_USER
+      - WORDPRESS_DB_ADMIN_PASSWORD=$MYSQL_PASSWORD
     volumes:
       - wordpress:/var/www/html/wordpress
     networks:
