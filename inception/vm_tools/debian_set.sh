@@ -6,6 +6,7 @@ apt-transport-https \
 curl \
 ca-certificates \
 software-properties-common \
+gnupg2 \
 git \
 make \
 vim \
