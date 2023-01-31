@@ -13,14 +13,13 @@ if [ $? -ne 0 ]; then
 	mysql -e "FLUSH PRIVILEGES;"
 	mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
 
-	mysql $MYSQL_DATABASE -uroot -p$MYSQL_ROOT_PASSWORD
-	mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown
-	
+	mysql -uroot -p$MYSQL_ROOT_PASSWORD
+	pkill -9 mariadb
+
 	touch /var/lib/mysql/.setup
 
 	ln -s /run/mysqld/mysqld.sock /var/lib/mysql/mysql.sock
 fi
-
 
 # 현재 쉘스크립트를 실행중인 bash(pid 1)를 대체
 exec mysqld_safe
