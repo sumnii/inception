@@ -6,7 +6,7 @@ chown -R www-data:www-data /var/www/
 
 if [ ! -f "/var/www/html/wordpress/index.php" ]; then
 	sudo -u www-data sh -c " \
-	wp core download --locale=$WORDPRESS_LANG && \
+	wp core download && \
 
 	wp config create --dbname=$MYSQL_DATABASE --dbuser=$WORDPRESS_DB_USER \
 	--dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST --dbcharset="utf8" && \
