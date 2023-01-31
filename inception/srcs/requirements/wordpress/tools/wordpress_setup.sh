@@ -19,7 +19,6 @@ if [ ! -f "/var/www/html/wordpress/index.php" ]; then
 	
 	wp plugin update --all
 	"
-	sudo echo "127.0.0.1 $DOMAIN_NAME" >> /etc/hosts
 fi
 
 # foreground로 실행
