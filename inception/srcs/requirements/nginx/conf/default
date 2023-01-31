@@ -11,7 +11,7 @@ server {
 	ssl_protocols TLSv1.2 TLSv1.3;
 
 	# Set root dir of server
-	root /var/www/html;
+	root /var/www/html/wordpress;
 
 	# Auto index
 	index index.php index.html index.htm index.nginx-debian.html;
